@@ -1,6 +1,6 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::json_types::ValidAccountId;
-use near_sdk::{AccountId, Balance, Promise, env, near_bindgen};
+use near_sdk::json_types::{U128, ValidAccountId};
+use near_sdk::{AccountId, Promise, env, near_bindgen};
 
 near_sdk::setup_alloc!();
 
@@ -19,9 +19,9 @@ impl Contract {
         }
     }
     
-    pub fn transfer(&self, account_id: ValidAccountId, amount: Balance) -> Promise<>{
+    pub fn transfer(&self, account_id: ValidAccountId, amount: U128) -> Promise<>{
         assert_eq!(env::predecessor_account_id(), self.owner_id, "ERROR: Only the owner of this contract can transfer tokens.");
         Promise::new(account_id.to_string())
-        .transfer(amount)
+        .transfer(amount.0)
     }
 }
