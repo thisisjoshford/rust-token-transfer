@@ -25,6 +25,6 @@ impl Contract {
             self.owner_id,
             "ERROR: Only the owner of this contract can transfer tokens."
         );
-        Promise::new(account_id.to_string()).transfer(amount.0)
+        Promise::new(account_id.to_string()).transfer(amount.0);
     }
 }
